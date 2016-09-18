@@ -40,9 +40,7 @@ core.logger = loggers.console {
 
 -- Connectors configuration.
 -- local is a LUA keyword so we cannot use the dot notation.
-connectors['local'] = {
-  persistence = "/var/snow-fox/instances"
-}
+connectors['local'] = {}
 
 -- Configure events sources used internally by the system ...
 events_from(sources.scheduler {
