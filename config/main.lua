@@ -38,17 +38,23 @@ core.logger = loggers.console {
   level  = loggers.ERROR
 }
 
--- Connectors configuration.
--- local is a LUA keyword so we cannot use the dot notation.
-connectors['local'] = {}
-
 -- Configure events sources used internally by the system ...
-events_from(sources.scheduler {
+core.events_from(sources.scheduler {
   tick = 1
 })
 
 -- ... end event sources used to interact with it.
-events_from(sources.tcp {
+core.events_from(sources.unix {
+  path = "/tmp/snow-fox.socket"
+})
+core.events_from(sources.tcp {
   bind = "0.0.0.0",
   port = 2351
 })
+
+-- Connectors configuration.
+-- local is a LUA keyword so we cannot use the dot notation.
+connectors['local'] = {}
+connectors.docker = {
+  path = ""
+}
