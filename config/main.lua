@@ -54,7 +54,7 @@ core.events_from(sources.tcp {
 
 -- Connectors configuration.
 -- local is a LUA keyword so we cannot use the dot notation.
-connectors['local'] = {}
+connectors["local"] = {}
 connectors.docker = {
-  path = ""
+  path = "/var/run/docker.sock"
 }
