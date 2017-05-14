@@ -37,13 +37,16 @@ core.logger = loggers.console {
   format = "${<log-group>} ${level} ${<now>} ${file} -> L${line} ==> ${message}",
   level  = loggers.ERROR
 }
+core.metadata = metastores.jsonfs {
+  store = "/tmp/snow-fox.localmeta.json"
+}
 
 -- Configure events sources used internally by the system ...
 core.events_from(sources.scheduler {
   tick = 1
 })
 
--- ... end event sources used to interact with it.
+-- ... and event sources used to interact with it.
 core.events_from(sources.unix {
   path = "/tmp/snow-fox.socket"
 })
@@ -56,5 +59,5 @@ core.events_from(sources.tcp {
 -- local is a LUA keyword so we cannot use the dot notation.
 connectors["local"] = {}
 connectors.docker = {
-  path = "/var/run/docker.sock"
+  socket = "/var/run/docker.sock"
 }
