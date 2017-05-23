@@ -61,3 +61,23 @@ connectors["local"] = {}
 connectors.docker = {
   socket = "/var/run/docker.sock"
 }
+
+
+--[[
+  SnowFox is meant to be used in clustered mode with a process for each node in
+  the cluster and the core configuration sets up the node's specific options.
+
+  The cluster configuration below is used to tell SnowFox how to talk to and
+  cooperate with other nodes in the cluster.
+
+  *************************************************************************
+  * Cluster options should be the same on all nodes unless you understand *
+  * you fully understand the implications of them being different.        *
+  *************************************************************************
+]]
+-- Cluster metadata is for information that is shared and used by all nodes.
+-- When running multiple nodes, use a shared service for this.
+-- TODO(stefano): update the store name once config refactor is done.
+cluster.metadata = metastores.jsonfs_cluster {
+  store = "/tmp/snow-fox.clustermeta.json"
+}
